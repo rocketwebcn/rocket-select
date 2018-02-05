@@ -1,0 +1,22 @@
+{
+  "name": "rocket-select",
+  "version": "1.0.0",
+  "description": "js下拉带搜索",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rocketwebcn/rocket-select.git"
+  },
+  "keywords": [
+    "js"
+  ],
+  "author": "韩广金",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rocketwebcn/rocket-select/issues"
+  },
+  "homepage": "https://github.com/rocketwebcn/rocket-select#readme"
+}
