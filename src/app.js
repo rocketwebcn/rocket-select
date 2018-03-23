@@ -1,9 +1,17 @@
-let func = () => {}
-const NUM = 10
-let arr = [1,2,3]
-let arrB = arr.map(item => item * 2)
-console.log(arrB)
+import './style/app'
+import configObj from './config'
+import Render from './render'
 
-function* fn() {
-	
+class RocketAuToComplete extends Render {
+	constructor(obj = {}) {
+		this.config = Object.assign(configObj, obj)
+
+		this.init()
+	}
+
+	init() {
+		console.log('我是初始化方法')
+	}
 }
+
+var rt = RocketAuToComplete()
