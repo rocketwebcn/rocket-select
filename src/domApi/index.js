@@ -25,24 +25,26 @@ class $Q {
 	}
 
 	addAttr(el, class_active, attr = "class") {
-		let class_name = this.query(el).getAttribute(attr);
+		let class_name = el.getAttribute(attr); // this.query(el)
 		if (class_name.indexOf(class_active) < 0) {
 			class_name = class_name.concat(' ' + class_active)
 			this.query(el).setAttribute(attr, class_name)
 		}
+		return this
 	}
 
 	removeAttr(el, class_active, attr = "class") {
-		let class_name = this.query(el).getAttribute(attr);
+		let class_name = el.getAttribute(attr); // this.query(el)
 		class_name     = class_name.replace(' ' + class_active, '')
 		this.query(el).setAttribute(attr, class_name)
 		return this
 	}
 
 	replaceAttr(el, start, end, attr = "class") {
-		let class_name = this.query(el).getAttribute(attr)
+		let class_name = el.getAttribute(attr) // this.query(el)
 		class_name     = class_name.replace(start, end)
 		this.query(el).setAttribute(attr, class_name)
+		return this
 	}
 
 	/**
@@ -51,11 +53,14 @@ class $Q {
 	 * @param  {Function} fn 回调函数
 	 * @return {[type]}      [description]
 	 */
-	on(el, fn) {
-		this.query(el).onclick = function(e) {
-			var e = e || window.event
-			e.preventDefault()
-			fn(e)
+	on(el, type, fn) {
+		var dom = this.query(el)
+		if (dom.addEventListener) {
+			dom.addEventListener(type, fn, false)
+		} else if(dom.attachEvent) {
+			dom.attachEvent('on' + type, fn)
+		} else {
+			dom[`on${type}`] = fn
 		}
 	}
 

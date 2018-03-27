@@ -3,8 +3,9 @@ export default {
 	index: 0,
 	tpl: '', // 用户自定义模板位置
 	listContent: [],
-	ajax() {
-		throw new Error('如果需要异步请求，请重写此方法')
+	change(val) {
+		console.log(val)
+		// throw new Error('如果需要异步请求，请重写此方法')
 	},
 	selectHandle() {
 		return null
