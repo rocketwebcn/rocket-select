@@ -20,8 +20,8 @@ class $Q {
 		return el
 	}
 
-	getAttr() {
-		return this.query(el).getAttribute(attr)
+	getAttr(el, attr) {
+		return el.getAttribute(attr)
 	}
 
 	addAttr(el, class_active, attr = "class") {

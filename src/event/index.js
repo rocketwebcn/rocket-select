@@ -1,5 +1,6 @@
 import DomApi from '../domApi';
-
+import throttle from '../util/util'
+// 73.253
 class HandleChange extends DomApi {
 	constructor() {
 		super()
@@ -47,7 +48,21 @@ class HandleChange extends DomApi {
 	}
 
 	enter(el) {
-		this.index = 4
+		throttle(this.delayEnter, {
+			context: this,
+			args: [el]
+		})
+	}
+
+	delayEnter(el) {
+		var obj = this.config
+		var active = obj.listContent[obj.index];
+		if (typeof active === 'object') {
+			this.inputDom.value = active.name
+			obj.selectHandle(this.inputDom.value)
+			// this.inputDom.value = ''
+			this.inputDom.blur()
+		}
 	}
 
 	inputHandle(el) { 
@@ -69,14 +84,31 @@ class HandleChange extends DomApi {
 	}
 
 	changeHandle() {
-		this.config.change(this.inputDom.value)
+		this.inputVal = this.inputDom.value
 	}
 
 	clickHandle(id) {
 		this.delegate(this.query(`#rs_${id}`), 'li', (e) => {
-			
-			console.log('我被点击了一下', e)
+			var i = parseInt(this.getAttr(e, 'data-index'));
+			var elList = document.querySelectorAll(`#rs_${id} > .rocket__select-item`);
+			var obj = this.config, str = 'active';
+			var active = obj.listContent[i];
+
+			this.removeAttr(elList[obj.index], str)
+			obj.index = i
+			this.addAttr(elList[obj.index], str)
+			this.inputDom.value = active.name
+			obj.selectHandle(active)
 		})
+	}
+
+	get inputVal() {
+		return this.inputVal
+	}
+
+	set inputVal(val) {
+		this.config.change(this.inputDom.value)
+		return val
 	}
 }
 

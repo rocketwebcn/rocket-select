@@ -28,7 +28,7 @@ class Render extends ElEvent {
 	updateEl(data, tpls) {
 		// 默认的模板或者是用户的模板
 		tpls = tpls ? tpls : '{{name}}'
-		var tpl = `<li class = "rocket__select-item{{active}}" date-index="{{index}}">${tpls}</li>`
+		var tpl = `<li class = "rocket__select-item{{active}}" data-index="{{index}}">${tpls}</li>`
 		var html = '';
 		data = Array.isArray(data) ? data : [];
 		if (data.length) {

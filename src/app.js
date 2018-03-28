@@ -1,6 +1,7 @@
 import './style/app'
 import configObj from './config'
 import Render from './render'
+import axios from 'axios'
 
 class RocketAuToComplete extends Render {
 	constructor(obj = {}) {
@@ -22,10 +23,13 @@ class RocketAuToComplete extends Render {
 
 var rt = new RocketAuToComplete({
 	el: '#app',
-	listContent: [
-		{id: 1, name: 2},
-		{id: 2, name: 3},
-		{id: 1, name: 4},
-		{id: 2, name: 5},
-	]
+	listContent: [],
+	change(val) {
+		axios.post(`http://192.168.73.253:38080/clinic-web/doctor/searchItem/listWestMedicine?token=c452f978-caa1-4a8d-871e-ab826f9fa319&md5id=e0ca6632c0c662b4b41b533b1f42317e&q=${val}`)
+		.then((r) => {
+			console.log(r)
+		}).catch(err => {
+
+		})
+	}
 })
