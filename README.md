@@ -17,9 +17,9 @@ src：开发目录
 首先在dist目录找到我们的js 引入到您的项目里面
 **html**
 <div id="app"></div>
-**javascript**
-var rt = new RocketAuToComplete({
-	el: '#app', // 挂载的位置 id名称自定义
-	tpl: '', // 可以自定义模板 String类型  Html模本字符串
+**javascript**  
+var rt = new RocketAuToComplete({   
+	el: '#app', // 挂载的位置 id名称自定义   
+	tpl: '', // 可以自定义模板 String类型  Html模本字符串   
 	
 })
