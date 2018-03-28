@@ -128,6 +128,12 @@ if (isDev) {
 		overlay: { // 调试错误用的
 			errors: true
 		},
+		proxy: {
+			'/api': {
+				target: "http://192.168.73.253:38080",
+				// pathRewrite: {'^/api' : ''}
+			}
+		},
 		publicPath: '/', // webpack-dev-server 访问的路径
 		historyApiFallback: true
 	}
