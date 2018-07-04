@@ -15,14 +15,15 @@ class Render extends ElEvent {
 
 	createEl(id) {
 		var str = id.replace(/#/, '')
-		this.query(id).innerHTML = `<div class="rocket__select-box">
-						<div class="rocket__select-after">
-							<input type="text" class="rocket__select-input" id="input-${str}">
-						</div>
-						<div class="rocket__select-body" id="rs_${str}-p">
-							<ul class="rocket__select-list" id="rs_${str}"></ul>
-						</div>
-					</div>`
+		this.query(id).innerHTML = `
+			<div class="rocket__select-box">
+				<div class="rocket__select-after">
+					<input type="text" autocomplete="off" class="rocket__select-input" id="input-${str}">
+				</div>
+				<div class="rocket__select-body" id="rs_${str}-p">
+					<ul class="rocket__select-list" id="rs_${str}"></ul>
+				</div>
+			</div>`
 	}
 
 	updateEl(data, tpls) {

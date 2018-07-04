@@ -1,6 +1,6 @@
 import DomApi from '../domApi';
 import throttle from '../util/util'
-// 73.253
+
 class HandleChange extends DomApi {
 	constructor() {
 		super()
@@ -28,23 +28,21 @@ class HandleChange extends DomApi {
 	}
 
 	up(el) {
-		var obj = this.config
-		if (obj.index <= 0) return;
-		this.elFlag(obj, el, -1)
+		if (this.index <= 0) return;
+		this.elFlag(el, -1)
 	}
 
 	down(el) {
-		var len = this.config.listContent.length - 1;
-		var obj = this.config;
-		if (obj.index >= len) return;
-		this.elFlag(obj, el, 1)
+		var len = this.selectList.length - 1;
+		if (this.index >= len) return;
+		this.elFlag(el, 1)
 	}
 
-	elFlag(obj, el, num) {
+	elFlag(el, num) {
 		var elList = document.querySelectorAll(`#rs_${el} > .rocket__select-item`), str = 'active';
-		this.removeAttr(elList[obj.index], str)
-		obj.index += num
-		this.addAttr(elList[obj.index], str)
+		this.removeAttr(elList[this.index], str)
+		this.index += num
+		this.addAttr(elList[this.index], str)
 	}
 
 	enter(el) {
@@ -56,11 +54,15 @@ class HandleChange extends DomApi {
 
 	delayEnter(el) {
 		var obj = this.config
-		var active = obj.listContent[obj.index];
+		var active = this.selectList[obj.index];
 		if (typeof active === 'object') {
-			this.inputDom.value = active.name
-			obj.selectHandle(this.inputDom.value)
-			// this.inputDom.value = ''
+			if (obj.clearVal) {
+				this.inputDom.value = ''
+				this.setData([])
+			} else {
+				this.inputDom.value = active.name
+			}
+			obj.selectHandle(active)
 			this.inputDom.blur()
 		}
 	}
@@ -91,14 +93,19 @@ class HandleChange extends DomApi {
 		this.delegate(this.query(`#rs_${id}`), 'li', (e) => {
 			var i = parseInt(this.getAttr(e, 'data-index'));
 			var elList = document.querySelectorAll(`#rs_${id} > .rocket__select-item`);
-			var obj = this.config, str = 'active';
-			var active = obj.listContent[i];
+			var str = 'active';
+			var active = this.selectList[i];
 
-			this.removeAttr(elList[obj.index], str)
-			obj.index = i
-			this.addAttr(elList[obj.index], str)
-			this.inputDom.value = active.name
-			obj.selectHandle(active)
+			this.removeAttr(elList[this.index], str)
+			this.index = i
+			this.addAttr(elList[this.index], str)
+			if (this.config.clearVal) {
+				this.inputDom.value = ''
+				this.setData([])
+			} else {
+				this.inputDom.value = active.name
+			}
+			this.config.selectHandle(active)
 		})
 	}
 
@@ -107,7 +114,7 @@ class HandleChange extends DomApi {
 	}
 
 	set inputVal(val) {
-		this.config.change(this.inputDom.value)
+		this.config.change.call(this, this.inputDom.value)
 		return val
 	}
 }

@@ -121,7 +121,7 @@ const config = {
 if (isDev) {
 	config.devServer = {
 		host: '127.0.0.1', // 访问地址
-		port: '8888', // 访问端口号
+		port: '8899', // 访问端口号
 		compress: true,
 		contentBase: path.join(__dirname, '../dist'), // 访问路径
 		hot: true,
