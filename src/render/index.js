@@ -14,13 +14,21 @@ class Render extends ElEvent {
 	}
 
 	createEl(id) {
-		var str = id.replace(/#/, '')
+		var str = id.replace(/#/, '');
+		var result = '';
+
+		if (this.config.headList) {
+			result = this.config.headList.map(val => `<li class="item">${val}</li>`).join('')
+			console.log('result', result)
+		}
+
 		this.query(id).innerHTML = `
 			<div class="rocket__select-box">
 				<div class="rocket__select-after">
 					<input type="text" autocomplete="off" class="rocket__select-input" id="input-${str}">
 				</div>
 				<div class="rocket__select-body" id="rs_${str}-p">
+					<ul class="rocket__select-title">${result}</ul>
 					<ul class="rocket__select-list" id="rs_${str}"></ul>
 				</div>
 			</div>`

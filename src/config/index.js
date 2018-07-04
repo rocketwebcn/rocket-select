@@ -3,7 +3,8 @@ export default {
 	index: 0,
 	tpl: '', // 用户自定义模板位置
 	listContent: [],
-	clearVal: true,
+	headList: null, // 下拉框的表头 
+	clearVal: true, // 是否清空输入框
 	change(val) {
 		// this.listContent.filter(value => value === val)
 		// console.log(val, this.listContent.filter(value => value.name === val ? value : ''))

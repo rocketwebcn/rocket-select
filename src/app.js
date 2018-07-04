@@ -46,6 +46,7 @@ window.RocketAuToComplete = RocketAuToComplete
 // new RocketAuToComplete({
 // 	el: '#app',
 // 	listContent: [],
+// 	headList: ['名字', '性别'],
 // 	change(val) {
 // 		axios.get('https://randomuser.me/api', {
 // 			params: {
